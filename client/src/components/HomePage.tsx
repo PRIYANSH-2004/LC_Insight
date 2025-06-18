@@ -58,7 +58,7 @@ const HomePage = () => {
 
   return (
     <div className="p-4 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6">LeetCode Profile Analyzer</h2>
+      <h2 className="text-2xl font-bold mb-6">LC Insight</h2>
       
       <form onSubmit={handleSubmit} className="space-y-4">
         {userNames.map((username, index) => (
