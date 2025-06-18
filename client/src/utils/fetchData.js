@@ -1,4 +1,5 @@
 import axios from "axios"
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const fetchData = async (username) => {
     const query = {
@@ -39,10 +40,9 @@ const fetchData = async (username) => {
         `,
         variables: { username: username || "PRIYANSH_2004" }
     };
-
     try {
         const response = await axios.post(
-            "http://localhost:5000/leetcode", // proxy URL
+            `${API_URL}/leetcode`, // proxy URL
             query,
             { headers: { "Content-Type": "application/json" } }
         );

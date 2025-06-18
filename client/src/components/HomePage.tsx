@@ -116,6 +116,7 @@ const HomePage = () => {
         </div>
       )}
       {/* <VisitorCounter/> */}
+      <p className="fixed bottom-0 ">Made with ❤️ by Priyansh</p>
     </div>
   )
 }
