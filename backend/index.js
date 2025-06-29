@@ -5,9 +5,7 @@ require('dotenv').config()
 const app = express();
 app.use(cors())
 app.use(express.json()) // why this is used
-// const API_URL ;
-// console.log(API_URL)
-// console.log(process.env);
+
 const PORT = process.env.PROXY_PORT
 
 app.post("/leetcode", async (req, res) => {
