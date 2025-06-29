@@ -5,7 +5,7 @@ require('dotenv').config()
 const app = express();
 app.use(cors())
 app.use(express.json()) // why this is used
-const API_URL = process.env.VITE_PROXY_URL || "https://leetcode.com/graphql";
+// const API_URL ;
 // console.log(API_URL)
 // console.log(process.env);
 const PORT = process.env.PROXY_PORT
@@ -15,7 +15,7 @@ app.post("/leetcode", async (req, res) => {
         console.log("Incoming request body:", req.body);
 
         const response = await axios.post(
-            {API_URL},
+            "https://leetcode.com/graphql",
             req.body,
             {
                 headers: {
