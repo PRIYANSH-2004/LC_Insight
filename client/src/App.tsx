@@ -7,7 +7,7 @@ function App() {
 
   return (
     <div className="">
-      <h2 className="fixed top-0 left-0 right-0 items-center text-2xl font-bold mb-6 bg-gradient-to-br from-blue-600 to-purple-600 bg-clip-text text-transparent  p-3">
+      <h2 className="top-0 left-0 right-0 items-center text-2xl font-bold mb-6 bg-gradient-to-br from-blue-600 to-purple-600 bg-clip-text text-transparent  p-3">
         <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl mr-6 shadow-lg"> 
           <LuTrophy className='text-3xl text-white'/>
         </div>
