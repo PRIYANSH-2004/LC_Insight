@@ -1,8 +1,8 @@
 import axios from "axios"
 const API_URL = import.meta.env.VITE_PROXY_URL  || 'http://localhost:5000';
-// console.log(`API url -> ${API_URL}`)
 const fetchData = async (username) => {
-    console.log(API_URL)
+    console.log(`API url -> ${API_URL}`)
+    // console.log(API_URL)
     const query = {
         query: `
             query getUserData($username: String!) {
@@ -47,7 +47,7 @@ const fetchData = async (username) => {
             query,
             { headers: { "Content-Type": "application/json" } }
         );
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
     } catch (error) {
         console.error("Error fetching data:", error);
