@@ -6,7 +6,7 @@ const app = express();
 app.use(cors())
 app.use(express.json()) // why this is used
 
-const PORT = process.env.PROXY_PORT
+const PORT = process.env.PROXY_PORT || 5000
 
 app.post("/leetcode", async (req, res) => {
     try {
