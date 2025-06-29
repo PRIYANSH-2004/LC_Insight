@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import fetchData from "../utils/fetchData";
 import ShowUserData from "./ShowUserData";
 import CompareUserCard from "./CompareUserCard";
+import { FaArrowTrendUp, FaUsers, FaAward} from "react-icons/fa6";
 // import VisitorCounter from './VisitorCounter'
 
 const HomePage = () => {
@@ -39,7 +40,7 @@ const HomePage = () => {
     setError("");
 
     try {
-      setUserNames(["PRIYANSH_2004", "ashwin190304", "PRIYANSH_2004"]);
+      // setUserNames(["PRIYANSH_2004", "ashwin190304", "PRIYANSH_2004"]);
       const promises = userNames
         .filter((name) => name.trim())
         .map((name) => fetchData(name));
@@ -62,27 +63,50 @@ const HomePage = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center text-center border-4 border-red-700">
-      
-      <h2 className="fixed top-0 left-0 right-0 items-center text-2xl font-bold mb-6 text-black bg-gray-100 p-3">
-        LC Insight
-      </h2>
-      <div className="p-4 w-full sm:px-6 lg:px-8 pt-16 pb-16 border m-16 ">
-        <form onSubmit={handleSubmit} className="space-y-4 w-full rounded border flex flex-col justify-center mx-auto max-w-md">
+    <div className="w-full flex flex-col items-center justify-center mt-16 mb-16 px-4 ">
+      <div className="w-full max-w-2xl bg-white shadow-xl rounded-xl p-8 sm:px-10">
+        <h3 className="text-3xl font-extrabold mb-2 bg-gradient-to-br from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          LeetCode Profile Analyzer
+        </h3>
+        <p className="mb-8 text-gray-600">
+          Compare your LeetCode stats with friends or analyze your own profile!
+        </p>
+        <div className="flex flex-wrap justify-center gap-3 mt-6 mb-6">
+            <div className="flex items-center space-x-2 bg-white rounded-full px-3 py-1.5 shadow-md border border-gray-100">
+              
+              <FaArrowTrendUp className="text-blue-500"/>
+              <span className="text-sm font-medium text-gray-700">Real-time Stats</span>
+            </div>
+            <div className="flex items-center space-x-2 bg-white rounded-full px-3 py-1.5 shadow-md border border-gray-100">
+              
+              <FaUsers className="text-green-600"/>
+              <span className="text-sm font-medium text-gray-700">Multi-User Compare</span>
+            </div>
+            <div className="flex items-center space-x-2 bg-white rounded-full px-3 py-1.5 shadow-md border border-gray-100">
+              
+              <FaAward className="text-purple-500"/>
+              <span className="text-sm font-medium text-gray-700">Detailed Analysis</span>
+            </div>
+          </div>
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 w-full flex flex-col justify-center"
+        >
           {userNames.map((username, index) => (
-            <div key={index} className="flex gap-2">
+            <div key={index} className="flex gap-2 items-center">
               <input
                 value={username}
-                autoComplete="name11" // remove it later
-                placeholder={`Enter LeetCode username ${index + 1}`}
-                className="border p-2 rounded flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-200"
+                autoComplete="off"
+                placeholder={`LeetCode username ${index + 1}`}
+                className="border border-gray-300 p-2 rounded-lg flex-1 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-50 transition"
                 onChange={(e) => handleInputChange(index, e.target.value)}
               />
               {index > 0 && (
                 <button
                   type="button"
                   onClick={() => handleRemoveUser(index)}
-                  className="px-3 py-2 text-red-500 hover:text-red-700"
+                  className="px-3 py-2 text-red-500 hover:text-red-700 rounded-full transition"
+                  aria-label="Remove user"
                 >
                   ×
                 </button>
@@ -90,12 +114,12 @@ const HomePage = () => {
             </div>
           ))}
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 mt-2">
             {userNames.length < 3 && (
               <button
                 type="button"
                 onClick={handleAddUser}
-                className="px-4 py-2 text-blue-500 border border-blue-500 rounded hover:bg-blue-50"
+                className="px-4 py-2 text-blue-600 border border-blue-400 rounded-lg hover:bg-blue-50 transition font-medium"
               >
                 + Add Profile
               </button>
@@ -104,11 +128,32 @@ const HomePage = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+              className={`bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold shadow hover:bg-blue-700 transition disabled:bg-gray-300 disabled:cursor-not-allowed`}
             >
-              {isLoading
-                ? "Loading..."
-                : userNames.length <= 1
+              {isLoading ? (
+                <span className="flex items-center gap-2">
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      fill="none"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8z"
+                    />
+                  </svg>
+                  Loading...
+                </span>
+              ) : userNames.length <= 1
                 ? "Analyze"
                 : "Compare"}
             </button>
@@ -116,31 +161,52 @@ const HomePage = () => {
         </form>
 
         {error && (
-          <div className="mt-4 text-red-500 font-bold p-4 bg-red-50 rounded">
+          <div className="mt-6 text-red-700 font-bold p-4 bg-red-100 rounded-lg border border-red-300 transition">
             {error}
           </div>
         )}
-
       </div>
-        {showData && userData.length > 0 && !error && (
-          <div className="mt-8 gap-8 flex flex-nowrap ">
-            {userData.length > 1 ? (
-              <div className="flex flex-row gap-4 border mb-16">
-                {userData.map((data, index) => (
-                  <CompareUserCard key={index} userData={data} />
-                ))}
+
+      {showData && userData.length > 0 && !error && (
+        
+        
+        <div className="mt-12 w-full flex flex-col items-center">
+          <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                {userData.length > 1 ? "🏆 Comparison Results" : "📊 Profile Analysis"}
+              </h2>
+              <p className="text-gray-600">
+                {userData.length > 1 
+                  ? "Compare the coding champions side by side"
+                  : "Detailed breakdown of your LeetCode journey"
+                }
+              </p>
+            </div>
+
+          {userData.length > 1 ? (
+            <div className="flex flex-col md:flex-row gap-6 w-full justify-center">
+              {userData.map((data, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md min-w-[320px] transition hover:shadow-2xl"
+                >
+                  <CompareUserCard userData={data} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            userData.map((data, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-lg p-6 w-full max-w-lg min-w-[320px] transition hover:shadow-2xl"
+              >
+                <ShowUserData userData={data} />
               </div>
-            ) : (
-              userData.map((data, index) => (
-                <ShowUserData key={index} userData={data} />
-              ))
-            )}
-          </div>
-        )}
-        {/* <VisitorCounter/> */}
-        <p className="fixed bottom-0 left-0 right-0 text-center text-black bg-gray-100 py-2 text-sm">
-          Made with ❤️ by Priyansh
-        </p>
+            ))
+          )}
+        </div>
+      )}
+      {/* <VisitorCounter/> */}
     </div>
   );
 };
