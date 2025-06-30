@@ -103,3 +103,4 @@ PROXY_PORT=5000
 1. **Analyze a Profile**: Enter a LeetCode username to view detailed statistics
 2. **Compare Users**: Add multiple users to compare their performance
 3. **View Insights**: Get comprehensive data about problem-solving patterns
+![image](https://github.com/user-attachments/assets/29001233-ac4a-4d5a-a0ce-920aca6b7db0)
