@@ -105,40 +105,51 @@ const ShowUserData: React.FC<UserDataProps> = (props) => {
           {userData?.data?.matchedUser?.submitStats?.acSubmissionNum ? (
           <div className="bg-white shadow rounded-lg p-6">
             <h3 className="text-xl font-bold mb-4">Problem Solving Stats</h3>
-            <div className="space-y-2">
-              {userData.data.matchedUser.submitStats.acSubmissionNum.map((item) => (
-                <div 
-                  key={item.difficulty} 
-                  className="flex flex-wrap items-center justify-between p-3 bg-gray-50 rounded"
-                >
-                  <span className={`font-medium ${
-                    item.difficulty === 'Hard' ? 'text-red-600' :
-                    item.difficulty === 'Medium' ? 'text-yellow-600' :
-                    item.difficulty === 'Easy' ? 'text-green-600' :
-                    'text-gray-600'
-                  }`}>
-                    {item.difficulty ?? "null"}
-                  </span>
-                  <div className="flex items-center gap-4">
-                    <span className="text-black font-medium">{item.count ?? "null"} solved</span>
-                    <span className="text-gray-500">•</span>
-                    <span className="text-gray-600">
-                      Success Rate: 
-                      {item.submissions
-                        ? ((item.count / item.submissions) * 100).toFixed(1)
-                        : "null"
-                      }%
+            <div className="space-y-2 flex flex-col w-full">
+              {userData.data.matchedUser.submitStats.acSubmissionNum.map(
+                (item) => (
+                  <div
+                    key={item.difficulty}
+                    className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2 p-3 bg-gray-50 rounded"
+                  >
+                    <span
+                      className={`font-medium ${
+                        item.difficulty === "Hard"
+                          ? "text-red-600"
+                          : item.difficulty === "Medium"
+                          ? "text-yellow-600"
+                          : item.difficulty === "Easy"
+                          ? "text-green-600"
+                          : "text-gray-600"
+                      } 
+                      
+                      `}
+                    >
+                      {item.difficulty ?? "null"}
                     </span>
-                    <span className="text-gray-500">•</span>
-                    <span className="text-black">
-                      ({item.submissions ?? "null"} submissions)
-                    </span>
+                    <div className="grid items-start sm:items-center gap-2 sm:gap-4">
+                      <span className="text-black font-medium">
+                        {item.count ?? "null"} solved
+                      </span>
+                      {/* <span className="text-gray-500 hidden sm:inline">•</span> */}
+                      <span className="text-gray-600">
+                        Success Rate:
+                        {item.submissions
+                          ? ((item.count / item.submissions) * 100).toFixed(1)
+                          : "null"}
+                        %
+                      </span>
+                      {/* <span className="text-gray-500 hidden sm:inline">•</span> */}
+                      <span className="text-black">
+                        ({item.submissions ?? "null"} submissions)
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
-          ) : (
+        ) : (
             <div className="bg-white shadow rounded-lg p-6">
               <h3 className="text-xl font-bold mb-4">Problem Solving Stats</h3>
               <p className="text-gray-600">No submission stats available.</p>
